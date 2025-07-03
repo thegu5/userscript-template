@@ -37,7 +37,10 @@ const server = http.createServer((req, res) => {
 const extraMeta = Object.entries(pkg.userscript)
 	.map(([meta, value]) => `// ${meta.padEnd(13, " ")}${value}`)
 	.join("\n");
+
 server.listen(9000, () => {
+	// the "@grant none" here disables sandboxing, so we don't need to use unsafeWindow etc (normal window works fine)
+	// https://violentmonkey.github.io/api/metadata-block/#grant
 	console.log(`
 Dev userscript:
 
@@ -47,6 +50,7 @@ Dev userscript:
 // @description ${pkg.description}
 // @version     ${pkg.version}
 // @namespace   ${pkg.homepage}
+// @grant       none
 ${extraMeta}
 // ==/UserScript==
 
