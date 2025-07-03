@@ -1,19 +1,23 @@
 {
   "name": "userscript-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "some description",
+  "homepage": "https://github.com/thegu5/userscript-template",
   "main": "index.js",
   "scripts": {
     "dev": "node dev.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "you!",
+  "license": "MIT",
   "dependencies": {
     "rolldown": "1.0.0-beta.23"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6"
   },
-  "type": "module"
+  "type": "module",
+  "userscript": {
+    "@match": "example.com",
+    "@run-at": "document-start"
+  }
 }

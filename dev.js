@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { watch } from "rolldown";
+import pkg from "./package.json" with { type: "json" };
 
 const watcher = watch({
 	input: path.resolve(import.meta.dirname, "src/index.ts"),
@@ -32,18 +33,21 @@ const server = http.createServer((req, res) => {
 
 	res.end(readFileSync(`dist/bundle.js`, "utf8"));
 });
+
+const extraMeta = Object.entries(pkg.userscript)
+	.map(([meta, value]) => `// ${meta.padEnd(13, " ")}${value}`)
+	.join("\n");
 server.listen(9000, () => {
 	console.log(`
 Dev userscript:
 
 // ==UserScript==
-// @name        Dev Script
-// @author      ??
-// @description ??
-// @version     1.0
-// @namespace   ??
-// @match       example.com
-// @run-at 		document-start
+// @name        ${pkg.name}
+// @author      ${pkg.author}
+// @description ${pkg.description}
+// @version     ${pkg.version}
+// @namespace   ${pkg.homepage}
+${extraMeta}
 // ==/UserScript==
 
 (() => {
