@@ -2,20 +2,13 @@ import { readFileSync } from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { watch } from "rolldown";
-import pkg from "./package.json" with { type: "json" };
+import { loadConfig } from "rolldown/config";
+import { outputPath } from "./rolldown.config.js";
+import { getBanner } from "./src/banner.ts";
 
-const watcher = watch({
-	input: path.resolve(import.meta.dirname, "src/index.ts"),
-	output: {
-		file: path.resolve(import.meta.dirname, "dist/bundle.js"),
-		format: "esm",
-		sourcemap: "inline",
-	},
-	platform: "browser",
-	watch: {
-		include: "src/**",
-	},
-});
+const watcher = watch(
+	await loadConfig(path.resolve(import.meta.dirname, "rolldown.config.js")),
+);
 
 watcher.on("restart", () => {
 	console.log("watcher restarting");
@@ -31,28 +24,13 @@ const server = http.createServer((req, res) => {
 
 	if (req.method !== "GET") return res.end();
 
-	res.end(readFileSync(`dist/bundle.js`, "utf8"));
+	res.end(readFileSync(outputPath, "utf8"));
 });
 
-const extraMeta = Object.entries(pkg.userscript)
-	.map(([meta, value]) => `// ${meta.padEnd(13, " ")}${value}`)
-	.join("\n");
-
 server.listen(9000, () => {
-	// the "@grant none" here disables sandboxing, so we don't need to use unsafeWindow etc (normal window works fine)
-	// https://violentmonkey.github.io/api/metadata-block/#grant
-	console.log(`
-Dev userscript:
+	console.log(`Dev userscript:
 
-// ==UserScript==
-// @name        ${pkg.name}
-// @author      ${pkg.author}
-// @description ${pkg.description}
-// @version     ${pkg.version}
-// @namespace   ${pkg.homepage}
-// @grant       none
-${extraMeta}
-// ==/UserScript==
+${getBanner()}
 
 (() => {
 	let xhr = new XMLHttpRequest();

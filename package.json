@@ -5,7 +5,8 @@
   "homepage": "https://github.com/thegu5/userscript-template",
   "main": "index.js",
   "scripts": {
-    "dev": "node dev.js"
+    "dev": "node --experimental-strip-types --disable-warning=ExperimentalWarning dev.js",
+    "build": "rolldown -c rolldown.config.js build"
   },
   "author": "you!",
   "license": "MIT",
@@ -14,8 +15,7 @@
     "rolldown": "1.0.0-beta.23"
   },
   "type": "module",
-  "userscript": {
-    "@match": "example.com",
-    "@run-at": "document-start"
+  "engines": {
+    "node": ">=22"
   }
 }
