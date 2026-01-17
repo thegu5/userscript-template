@@ -14,5 +14,6 @@ This example shows an image in the browser's console when visiting https://examp
 ### Customizing
 - replace values like name, author etc in `package.json` with your own
 - IMPORTANT: replace the value of `@match` in `src/banner.ts` with the site your userscript is for
+- Make sure to recopy the development userscript after changing these values
 
 To make a release usable by other people, run `pnpm build`, then check the `dist` folder.
