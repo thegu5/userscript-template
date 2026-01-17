@@ -1,16 +1,18 @@
 {
-    "compilerOptions": {
-        "lib": ["ESNext", "DOM"],
-        "target": "ESNext",
-        "module": "ESNext",
-        "allowJs": true,
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "rewriteRelativeImportExtensions": true,
-        "verbatimModuleSyntax": true,
-        "resolveJsonModule": true,
-        "noEmit": true,
-        "strict": true,
-        "skipLibCheck": true,
-    }
+	"compilerOptions": {
+		"lib": ["ESNext", "DOM"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"allowJs": true,
+		// there's some weirdness around @types/node applying to everything, even when compilerOptions.types is set to []
+		// "checkJs": true,
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"rewriteRelativeImportExtensions": true,
+		"verbatimModuleSyntax": true,
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"strict": true,
+		"skipLibCheck": true,
+	},
 }

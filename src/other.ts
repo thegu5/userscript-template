@@ -1,3 +1,3 @@
 export function someFunc() {
-    return ":)";
+	return "hello from another file!";
 }

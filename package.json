@@ -1,21 +1,20 @@
 {
-  "name": "userscript-template",
-  "version": "1.0.0",
-  "description": "some description",
-  "homepage": "https://github.com/thegu5/userscript-template",
-  "main": "index.js",
-  "scripts": {
-    "dev": "node --experimental-strip-types --disable-warning=ExperimentalWarning dev.js",
-    "build": "rolldown -c rolldown.config.js build"
-  },
-  "author": "you!",
-  "license": "MIT",
-  "devDependencies": {
-    "@biomejs/biome": "2.0.6",
-    "rolldown": "1.0.0-beta.23"
-  },
-  "type": "module",
-  "engines": {
-    "node": ">=22"
-  }
+	"name": "userscript-template",
+	"version": "1.0.0",
+	"description": "some description",
+	"homepage": "https://github.com/thegu5/userscript-template",
+	"scripts": {
+		"dev": "node --experimental-strip-types --disable-warning=ExperimentalWarning dev.js",
+		"build": "rolldown -c rolldown.config.js build"
+	},
+	"author": "you!",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "2.3.11",
+		"rolldown": "1.0.0-beta.60"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	}
 }

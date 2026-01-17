@@ -1,19 +1,21 @@
 // This is a special file that produces the userscript metadata banner (for dev.mjs).
-// IMPORTANT: make sure to change @run-at to the site the script is for!
-// You will need to restart `pnpm dev` if you change the banner. (wip)
-// Imported by dev.js
+// IMPORTANT: make sure to modify the @match line to reference the page your userscript is for!
+// https://violentmonkey.github.io/api/metadata-block/
+// You will need to recopy the development userscript if you change the banner here.
 
 import pkg from "../package.json" with { type: "json" };
 
 export const getBanner = () => {
-    return `// ==UserScript==
+	return `// ==UserScript==
 // @name        ${pkg.name}
 // @author      ${pkg.author}
 // @description ${pkg.description}
 // @version     ${pkg.version}
 // @namespace   ${pkg.homepage}
-// @match       example.com
+// @homepageURL ${pkg.homepage}
+// @match       https://example.com/
 // @run-at      document-start
 // @grant       none
-// ==/UserScript==`
-}
+// @top-level-await
+// ==/UserScript==`;
+};

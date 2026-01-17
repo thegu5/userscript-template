@@ -1,14 +1,10 @@
 import { readFileSync } from "node:fs";
 import http from "node:http";
-import path from "node:path";
 import { watch } from "rolldown";
-import { loadConfig } from "rolldown/config";
-import { outputPath } from "./rolldown.config.js";
+import rolldownConfig, { outputPath } from "./rolldown.config.js";
 import { getBanner } from "./src/banner.ts";
 
-const watcher = watch(
-	await loadConfig(path.resolve(import.meta.dirname, "rolldown.config.js")),
-);
+const watcher = watch(rolldownConfig);
 
 watcher.on("restart", () => {
 	console.log("watcher restarting");
@@ -31,13 +27,7 @@ server.listen(9000, () => {
 	console.log(`Dev userscript:
 
 ${getBanner()}
-
-(() => {
-	let xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:9000', false);
-	xhr.send();
-	eval(xhr.responseText);
-})();
+await import("http://localhost:9000/");
 // END
 `);
 });

@@ -5,8 +5,14 @@ This is the general structure I use when making userscripts, to avoid much of th
 ## Getting Started
 - click "use this template" on the top right" to make a new repo
 - clone it locally with `git clone`
-- If using VSCode, the `biomejs` extension ([marketplace](https://marketplace.visualstudio.com/items?itemName=biomejs.biome), [openvsx](https://open-vsx.org/extension/biomejs/biome)) is highly recommended
-- `pnpm install` (if you don't have [pnpm](https://pnpm.io/) already, `corepack enable`)
-- replace values like name, author etc in `package.json` with your own (also check `@run-at` in `src/banner.ts`)
-- `pnpm dev`, and copy the userscript given to your favorite userscript manager (I recommend [violentmonkey](https://violentmonkey.github.io/get-it/))
-- You're all set! Head over to `src` :)
+- `pnpm install` (if you don't have [pnpm](https://pnpm.io/) already, install it)
+
+For development - run `pnpm dev`, and copy the userscript given to your favorite userscript manager (I recommend [violentmonkey](https://violentmonkey.github.io/get-it/)). You may need to accept a permission popup that asks to "Look for and connect to any device on your local network", when on the page you want to use your userscript with.
+
+This example shows an image in the browser's console when visiting https://example.com.
+
+### Customizing
+- replace values like name, author etc in `package.json` with your own
+- IMPORTANT: replace the value of `@match` in `src/banner.ts` with the site your userscript is for
+
+To make a release usable by other people, run `pnpm build`, then check the `dist` folder.
